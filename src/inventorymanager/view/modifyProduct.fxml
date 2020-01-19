@@ -97,6 +97,11 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
+            <Button id="addProductSaveBtn" fx:id="deletePartBtn" layoutX="759.0" layoutY="451.0" mnemonicParsing="false" onAction="#onDeletePart" text="Delete">
+               <padding>
+                  <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+               </padding>
+            </Button>
             </children>
         </AnchorPane>
     </children>

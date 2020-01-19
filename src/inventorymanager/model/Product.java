@@ -57,6 +57,10 @@ public class Product {
         return price;
     }
 
+    public String getPriceDisplay() {
+        return "$" + String.valueOf(price);
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }

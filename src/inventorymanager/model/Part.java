@@ -69,6 +69,10 @@ public abstract class Part {
         return price;
     }
 
+    public String getPriceDisplay() {
+        return "$" + String.valueOf(price);
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }

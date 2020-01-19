@@ -80,16 +80,6 @@ public class MainScreen implements Initializable {
 
 
     private void initializePartsTableView(ObservableList<Part> parts) {
-        if (parts.size() == 0) {
-            System.out.println("No parts in inventory");
-        }
-
-        // create columns
-        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
         partsTableView.getItems().clear();
         partsTableView.getItems().addAll(parts);
 
@@ -101,17 +91,21 @@ public class MainScreen implements Initializable {
 
     }
 
-    private void initializeProductsTableView(ObservableList<Product> products) {
-
-        if (products.size() == 0) {
-            System.out.println("No products in inventory");
-        }
-
+    private void initializeProductsTableCols() {
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("priceDisplay"));
+    }
 
+    private void initializePartsTableCols() {
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("priceDisplay"));
+    }
+
+    private void initializeProductsTableView(ObservableList<Product> products) {
         productsTableView.getItems().clear();
         productsTableView.getItems().addAll(products);
 
@@ -206,6 +200,7 @@ public class MainScreen implements Initializable {
         Util.changeScreen(Util.getStageFromButton(modifyProductBtn), Util.MODIFY_PRODUCT_FXML);
     }
 
+
     public void onExit() {
         Util.getStageFromButton(exitBtn).close();
     }
@@ -213,6 +208,8 @@ public class MainScreen implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Initializing mainScreen controller");
+        initializePartsTableCols();
+        initializeProductsTableCols();
         initializePartsTableView(Util.getInventory().getAllParts());
         initializeProductsTableView(Util.getInventory().getAllProducts());
     }

@@ -39,6 +39,8 @@ public abstract class ProductController {
     public TableColumn<Part, Integer> prodPartStockCol;
     public TableColumn<Part, Double> prodPartPriceCol;
 
+    public Button deletePartBtn;
+
     public Button saveBtn;
     public Button cancelBtn;
 
@@ -70,7 +72,7 @@ public abstract class ProductController {
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("priceDisplay"));
 
         allPartsTableView.getItems().clear();
         allPartsTableView.getItems().addAll(parts);
@@ -85,11 +87,23 @@ public abstract class ProductController {
         prodPartsTableView.refresh();
     }
 
+    public void onDeletePart() {
+        if (prodPartsTableView.getItems().size() == 0) {
+            Util.validationDialog("No part selected");
+            return;
+        }
+        if (Util.confirmDialog()) {
+            int selected = prodPartsTableView.getSelectionModel().getSelectedIndex();
+            prodPartsTableView.getItems().remove(selected);
+            prodPartsTableView.refresh();
+        }
+    }
+
     protected void initializeProdPartsTableView() {
         prodPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         prodPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         prodPartStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        prodPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        prodPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("priceDisplay"));
 
         prodPartsTableView.getItems().clear();
 
